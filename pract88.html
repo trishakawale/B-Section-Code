@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminar Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2><i class="fas fa-chalkboard-teacher"></i> Seminar Registration</h2>
+        <form>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" placeholder="Phone Number" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-building"></i>
+                <input type="text" placeholder="Organization/Institution" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="date" required>
+            </div>
+
+            <!-- Seminar choices -->
+            <div class="seminar-topics">
+                <p><strong>Select Seminar Topics:</strong></p>
+
+                <label><input type="checkbox" name="topic" value="AI"> Artificial Intelligence</label><br>
+                <label><input type="checkbox" name="topic" value="WebDev"> Web Development</label><br>
+                <label><input type="checkbox" name="topic" value="CyberSec"> Cyber Security</label><br>
+                <label><input type="checkbox" name="topic" value="DataSci"> Data Science</label><br>
+            </div>
+
+            <button type="submit" class="btn">
+                <i class="fas fa-paper-plane"></i> Register
+            </button>
+        </form>
+    </div>
+</body>
+</html>
