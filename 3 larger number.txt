@@ -1,0 +1,131 @@
+<html>
+
+<head>
+
+50
+
+<title>Sum of Two Numbers</title>
+
+<link rel="stylesheet" href="styles.css" />
+
+88
+
+</head>
+
+<body>
+
+<h2>Add Two Numbers</h2>
+
+<form>
+
+<label>Enter First Number</label>
+
+<input type="number" id="num1"><br><br>
+
+<label>Enter Second Number</label>
+
+<input type="number" id="num2"><br><br>
+
+<button type="button"
+
+onclick="calculateSum()">Add</button>
+
+</form>
+
+<p id="result">Result will appear here</p>
+
+<script>
+
+function calculateSum(){
+
+let
+
+a=parseInt(document.getElementById("num1").value);
+
+let
+
+b=parseInt(document.getElementById("num2").value);
+
+if (isNaN(a)) a= 0;
+
+if (isNaN(a)) b= 0;
+
+let sum=a+b;
+
+}
+
+document.getElementById("result").innerText = "Sum = + sum;
+
+</script>
+
+</body>
+
+</html>
+
+body {
+
+} font-family: Arial, sans-serif;
+
+padding: 20px;
+
+label {
+
+} display: block; margin-top: 10px; margin-bottom: 5px;
+
+input[type="number"] {
+
+padding: 5px;
+
+width: 200px;
+
+font-size: 1em;
+
+}
+
+button {
+
+margin-top: 15px;
+
+padding: 7px 15px;
+
+font-size: 1em;
+
+cursor: pointer;
+
+}
+
+#result {
+
+margin-top: 20px;
+
+font-weight: bold;
+
+font-size: 1.2em;
+
+}
+
+function displayMessage(num1, num2, num3) {
+
+// Check if all inputs are valid numbers
+
+if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+
+}
+
+return "Please enter valid numbers in all fields.";
+
+// Determine the largest number or if numbers are equal
+
+if(num1==num2 && num2==num3){
+
+return "EQUAL NUMBERS":
+
+}
+
+}else{
+
+let large Math.max(num1, num2, num3);
+
+return large" LARGER NUMBER":
+
+}
