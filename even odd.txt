@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Even or Odd Checker</title>
+
+</head>
+
+<body>
+
+<!-- Heading -->
+
+<h2>Even or Odd Checker</h2>
+
+<!-- Input field for the user to enter a number -->
+
+<label for="number">Enter a number</label>
+
+<input type="number" id="number" ?>
+
+<!-- Button to check if number is even or odd -->
+
+<button id="checkBtn" onclick="checkEvenOdd()">Check</button>
+
+<!-- Button to clear the input and result -->
+
+<button id="clearBtn" onclick="clearFields()">Clear</button>
+
+<!-- Paragraph to display the result dynamically
+
+<p id="result"></p>
+
+<!-- JavaScript code for functionality-->
+
+<script>
+
+function checkEvenOdd() {
+
+let num document.getElementById("number").value; let resultPara document.getElementById("result"); if(num ==""){
+
+resultPara.textContent "Please enter a number":
+
+return;
+
+}
+
+num Number (num);
+
+if (num % 2 == 0){
+
+resultPara.textContent num is even";
+
+}else{
+
+resultPara.textContent = num is odd";
+
+}
+
+}
+
+function clearFields() {
+
+document.getElementById("number").value = ""; // Clear input field
+
+document.getElementById("result").textContent = ""; //
+
+Clear result
+
+}
+
+</script>
+
+</body> </html>
