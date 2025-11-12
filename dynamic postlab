@@ -1,0 +1,179 @@
+// =============================
+// 🌿 PUBLIC FEEDBACK PORTAL USING NODE.JS & JAVASCRIPT
+// =============================
+
+// Import required module
+const express = require("express");
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// In-memory storage for feedbacks
+let feedbacks = [];
+
+// =============================
+// Serve the HTML page directly
+// =============================
+app.get("/", (req, res) => {
+  res.send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Public Feedback Portal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f6f9;
+    margin: 40px;
+    text-align: center;
+  }
+  h1 {
+    color: #2e7d32;
+  }
+  form {
+    background: white;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  input, textarea {
+    width: 90%;
+    margin: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    background-color: #2e7d32;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #response {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  .feedback-list {
+    margin-top: 30px;
+    text-align: left;
+    display: inline-block;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 60%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .feedback-item {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🌿 City Cleanliness Feedback Portal</h1>
+
+<form id="feedbackForm">
+  <label>Name:</label>
+  <input type="text" id="name" required>
+
+  <label>Email:</label>
+  <input type="email" id="email" required>
+
+  <label>Feedback / Complaint:</label>
+  <textarea id="message" required></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+
+<div id="response"></div>
+
+<div class="feedback-list" id="feedbackList"></div>
+
+<script>
+document.getElementById("feedbackForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const data = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    message: document.getElementById("message").value
+  };
+
+  const res = await fetch("/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const result = await res.json();
+  document.getElementById("response").innerText = result.message;
+
+  // Reload feedback list after submission
+  loadFeedbacks();
+  document.getElementById("feedbackForm").reset();
+});
+
+async function loadFeedbacks() {
+  const res = await fetch("/feedbacks");
+  const data = await res.json();
+  const list = document.getElementById("feedbackList");
+  list.innerHTML = "<h3>📝 Recent Feedbacks:</h3>";
+  data.forEach(fb => {
+    list.innerHTML += \`
+      <div class="feedback-item">
+        <strong>\${fb.name}</strong> (<em>\${fb.email}</em>)<br>
+        \${fb.message}<br>
+        <small>🕒 \${fb.date}</small>
+      </div>
+    \`;
+  });
+}
+
+// Load feedbacks on page load
+loadFeedbacks();
+</script>
+
+</body>
+</html>
+  `);
+});
+
+// =============================
+// Handle feedback submissions
+// =============================
+app.post("/submit", (req, res) => {
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "⚠️ All fields are required!" });
+  }
+
+  const feedback = { name, email, message, date: new Date().toLocaleString() };
+  feedbacks.push(feedback);
+
+  console.log("📩 New Feedback Received:", feedback);
+  res.status(200).json({ message: "✅ Thank you for your feedback!" });
+});
+
+// =============================
+// Fetch all feedbacks (API route)
+// =============================
+app.get("/feedbacks", (req, res) => {
+  res.json(feedbacks);
+});
+
+// =============================
+// Start Server
+// =============================
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(\`✅ Server running on http://localhost:\${PORT}\`);
+});
