@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pagination Example using jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+    }
+    .content div {
+      margin: 5px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      width: 300px;
+      margin: auto;
+    }
+    .pagination {
+      margin-top: 20px;
+    }
+    .pagination button {
+      padding: 5px 10px;
+      margin: 2px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .pagination button.active {
+      background-color: #28a745;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Pagination using jQuery</h2>
+
+  <div class="content"></div>
+
+  <div class="pagination"></div>
+
+  <script>
+    $(document).ready(function() {
+      // Sample Data
+      let items = [];
+      for (let i = 1; i <= 30; i++) {
+        items.push("Item " + i);
+      }
+
+      let perPage = 5;
+      let totalPages = Math.ceil(items.length / perPage);
+
+      function showPage(page) {
+        $(".content").empty();
+        let start = (page - 1) * perPage;
+        let end = start + perPage;
+        for (let i = start; i < end && i < items.length; i++) {
+          $(".content").append("<div>" + items[i] + "</div>");
+        }
+
+        $(".pagination button").removeClass("active");
+        $(".pagination button[data-page='" + page + "']").addClass("active");
+      }
+
+      // Create pagination buttons
+      for (let i = 1; i <= totalPages; i++) {
+        $(".pagination").append("<button data-page='" + i + "'>" + i + "</button>");
+      }
+
+      $(".pagination").on("click", "button", function() {
+        let page = $(this).data("page");
+        showPage(page);
+      });
+
+      showPage(1); // Display first page by default
+    });
+  </script>
+
+</body>
+</html>
