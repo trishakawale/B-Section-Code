@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-
+
+scale=1.0">
+
+<title>Registration Form Validation</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<script src="script.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Registration Form</h1>
+
+<form id="registrationForm">
+
+<div class="form-group">
+
+<label for="name">Name:</label>
+
+<input type="text" id="name">
+
+<span class="error" id="nameError"></span>
+
+</div>
+
+<div class="form-group">
+
+<label for="password">Password: </label>
+
+<input type="password" id="password">
+
+<span class="error" id="passwordError"></span>
+
+</div>
+
+<div class="form-group">
+
+<label for-"email">Email:</label>
+
+<input type="email" id="email">
+
+<span class="error" id="emailError"></span>
+
+</div>
+
+<div class="form-group">
+
+<label for="phone">Phone Number: </label>
+
+<input type="text" id="phone">
+
+<span class="error" id="phoneError"></span>
+
+</div>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
+
+<script>
+
+document.getElementById("registrationForm").addEventListener("submit",
+
+function(event) {
+
+let isValid = true;
+
+// Name Validation
+
+let name document.getElementById("name").value;
+
+let nameError document.getElementById("nameError");
+
+if (!validateName(name)) {
+
+nameError.textContent "Invalid name (only
+
+alphabets, min 6 characters).";
+
+isValid false;
+
+} else {
+
+nameError.textContent = "";
+
+// Password Validation
+
+let password = document.getElementById("password").value;
+
+let passwordError = document.getElementById("passwordError");
+
+if (IvalidatePassword(password)) {
+
+passwordError.textContent "Password must be at least 5 characters, include a letter, a number, and a special character.":
+
+isvalid false;
+
+} else { passwordError.textContent = "";
+
+// Email Validation
+
+let email document.getElementById("email").value;
+
+let emailError
+
+document.getElementById("enailError");
+
+if (!validateEmail(email)) {
+
+emailError textContent "Invalid email format.";
+
+isValid false;
+
+} else {
+
+emailError textContent = "";
+
+// Phone Number Validation
+
+let phone document.getElementById("phone").value;
+
+let phoneError -document.getElementById("phoneError");
+
+if (!validatePhone (phone)) {
+
+phoneError.textContent exactly 10 digits."; "Phone number must be
+
+isValid false;
+
+} else {
+
+phoneError textContent =" ";
+
+}
+
+if (lisValid) {
+
+event.preventDefault(); // Prevent form
+
+submission if validation fails.
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
+
+script.js
+
+function validateName(name){
+
+}
+
+var regex = /^[A-Za-z]{6,}$/;
+
+return regex.test(name);
+
+function validatePassword(password){
+
+}
+
+var regex /^[A-Za-z\d@#$%^&+=]{6,}$/;
+
+return regex.test(password);
+
+function validateEmail(email){
+
+var regex /^[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]
+
+{2,}$/;
+
+return regex.test(email);
+
+}
+
+function validatePhone (phone){
+
+var regex = /^\d{10}$/;
+
+return regex.test(phone);
+
+}
+
+.container (
+
+max-width: 400px;
+
+margin: auto;
+
+padding: 20px; background: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;
+
+}
+
+.form-group {
+
+margin-bottom: 15px;
+
+text-align: left;
+
+}
+
+input {
+
+}
+
+padding: 8px;
+
+width: 100%; border: 1px solid #ddd; border-radius: 4px;
+
+. error {
+
+color: red; font-size: 14px;
+
+}
+
+button {
+
+padding: 10px;
+
+width: 100%; border: none; background-color: #007bff; color: white; cursor: pointer;
+
+}
+
+button:hover { background-color: #0056b3; }
